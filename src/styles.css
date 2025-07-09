@@ -1,14 +1,61 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-@keyframes breathe {
-  0%, 100% { transform: scale(1); opacity: 0.8; }
-  50% { transform: scale(1.3); opacity: 1; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.animate-breathe {
-  animation: breathe 4s ease-in-out infinite;
-}
-
-.pixel-font {
+body {
   font-family: 'Press Start 2P', monospace;
+  background: #1a1a1a;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* Global pixel art styling */
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* SVG for timer circle */
+svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Utility classes */
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .pixel-button {
+    font-size: 10px;
+    padding: 12px 16px;
+  }
+  
+  .title {
+    font-size: 16px;
+  }
+  
+  .message-text {
+    font-size: 14px;
+  }
+  
+  .breathing-text {
+    font-size: 16px;
+  }
 }
