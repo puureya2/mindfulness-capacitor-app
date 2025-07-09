@@ -19,31 +19,45 @@ import { trigger, transition, style, animate } from '@angular/animations';
     ])
   ],
   template: `
-    <div class="flex flex-col items-center justify-center min-h-screen p-6 bg-indigo-50 text-center space-y-8">
+    <div
+      class="flex flex-col items-center justify-center min-h-screen p-6 bg-cover bg-center text-center space-y-8 transition-all duration-700"
+      [ngStyle]="{ 'background-image': 'url(' + currentBg + ')' }"
+    >
 
       <!-- Breathing -->
       <ng-container *ngIf="type === 'breathing'">
         <div class="relative w-64 h-64">
           <div class="absolute inset-0 rounded-full bg-blue-300 animate-breathe"></div>
         </div>
-        <p class="text-2xl font-semibold">Breathe...</p>
+        <p class="text-2xl font-semibold pixel-font">Breathe...</p>
       </ng-container>
 
       <!-- Affirmation / Gratitude -->
       <ng-container *ngIf="type !== 'breathing' && currentText">
         <div [@fadeText]="fadeState" (@fadeText.done)="onFadeDone()">
-          <p class="text-2xl font-medium">{{ currentText.text }}</p>
-          <p class="text-gray-600 mt-2 text-base">{{ currentText.subtext }}</p>
+          <p class="text-2xl font-medium pixel-font">{{ currentText.text }}</p>
+          <p class="text-gray-700 mt-2 text-base pixel-font text-shadow">{{ currentText.subtext }}</p>
         </div>
       </ng-container>
 
-      <p class="text-gray-500 text-lg">Time left: {{ timeLeft }}s</p>
+      <p class="text-gray-600 text-sm font-mono">Time left: {{ timeLeft }}s</p>
 
-      <button (click)="endSessionEarly()" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition">
+      <button
+        (click)="endSessionEarly()"
+        class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
+      >
         Skip Session
       </button>
     </div>
-  `
+  `,
+  styles: [`
+    .pixel-font {
+      font-family: 'Press Start 2P', monospace;
+    }
+    .text-shadow {
+      text-shadow: 1px 1px #ffffff80;
+    }
+  `]
 })
 export class SessionComponent implements OnInit, OnDestroy {
   type: 'breathing' | 'affirmation' | 'gratitude' = 'breathing';
@@ -54,6 +68,15 @@ export class SessionComponent implements OnInit, OnDestroy {
   currentText: { text: string; subtext: string } | null = null;
   nextText: { text: string; subtext: string } | null = null;
   fadeState: 'visible' | 'hidden' = 'hidden';
+
+  backgrounds = [
+    'assets/backgrounds/camp.jpg',
+    'assets/backgrounds/mountain.jpg',
+    'assets/backgrounds/mystical.jpg',
+    'assets/backgrounds/ocean.jpg',
+    'assets/backgrounds/park.jpg',
+  ];
+  currentBg = this.backgrounds[0];
 
   contentList: Record<string, { text: string; subtext: string }[]> = {
     affirmation: [
@@ -81,15 +104,15 @@ export class SessionComponent implements OnInit, OnDestroy {
       const items = this.contentList[this.type];
       let i = Math.floor(Math.random() * items.length);
       this.currentText = items[i];
+      this.currentBg = this.backgrounds[i % this.backgrounds.length];
 
-      // Trigger first fade after initial render tick
       setTimeout(() => {
         this.fadeState = 'visible';
       });
 
       this.rotateId = setInterval(() => {
         i = (i + 1) % items.length;
-        this.setText(items[i]);
+        this.setText(items[i], i);
       }, 20000);
     }
 
@@ -101,8 +124,9 @@ export class SessionComponent implements OnInit, OnDestroy {
     }, 1000);
   }
 
-  setText(item: { text: string; subtext: string }) {
+  setText(item: { text: string; subtext: string }, index: number) {
     this.nextText = item;
+    this.currentBg = this.backgrounds[index % this.backgrounds.length];
     this.fadeState = 'hidden';
   }
 
