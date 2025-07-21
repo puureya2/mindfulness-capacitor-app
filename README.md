@@ -1,18 +1,20 @@
-# 🌿 Mindful Sessions App
+# 🌿 Mindful Minutes
 
-A minimalist and calming mental wellness app built with **Angular**, powered by **Capacitor**, and deployed seamlessly to the web via **Vercel**.
+A minimalist, cross-platform mental wellness app built with **Angular**, styled using **TailwindCSS**, and powered by **Capacitor**. Designed to offer **60-second relaxing encouragements** and guided micro-meditations in a calming, pixel-inspired environment.
 
-This app guides users through **breathing exercises**, **daily affirmations**, and **gratitude reflections** — all presented with soft pixelated art, smooth fade transitions, and retro-style fonts.
+Originally created as a personal project for a loved one — this app blends creative design, functional code, and modern tooling to deliver a small but powerful mindfulness break.
+
+---
 
 ## ✨ Features
 
-- 🧘‍♂️ Guided **Breathing Sessions** with animated visuals
-- 💬 Rotating **Affirmations & Gratitude Prompts**
-- 🌄 Cute pixel art **backgrounds** that cycle with content
-- 🧠 Retro **pixel font UI** for a nostalgic vibe
-- 🌗 Smooth **fade animations** using Angular animations
-- 📱 Built with **Capacitor** to support native mobile app potential
-- 🚀 **Deployed on Vercel** for instant web access
+- ⏱️ **60-Second Encouragement Sessions** with calming phrases
+- 💬 Rotating **Affirmations & Gentle Prompts**
+- 🎨 **Pixel Art Backgrounds** crafted in Figma
+- 🧘‍♀️ **Breathing Cues & Soothing Animations** with Angular fade transitions
+- 🖋️ **Retro Pixel Fonts** from Google Fonts for nostalgic vibes
+- 📱 Built with **Capacitor 7.4.1** for mobile-native capabilities
+- 🚀 **Deployable via Vercel** for instant web access
 
 ---
 
@@ -21,31 +23,48 @@ This app guides users through **breathing exercises**, **daily affirmations**, a
 ### Frontend
 
 - **Angular 17+** (Standalone Components, Animations, Routing)
-- **Tailwind CSS** for utility-first styling
-- **HTML5 & TypeScript**
-- **Capacitor** for native compatibility
+- **TailwindCSS** for utility-first styling
+- **PostCSS** for animation and styling enhancements
+- **TypeScript** for type-safe UI logic
 
-### Assets & Design
+### Platform & Deployment
 
-- Pixel art **backgrounds** (custom and free assets)
-- Google Fonts: [`Press Start 2P`](https://fonts.google.com/specimen/Press+Start+2P)
-- CSS tricks: `backdrop-blur`, semi-transparent overlays, pixel font rendering
+- **Ionic + Capacitor** for native scaffolding
+- **Vercel** for static web deployment (optional)
+- **Google Fonts**: [`Press Start 2P`](https://fonts.google.com/specimen/Press+Start+2P)
 
-### Deployment
+### Design
 
-- **Vercel** (CI/CD integration + fast static hosting)
+- Figma-based **pixel art assets**
+- Backdrop blur, glow effects, and soft transitions
+- Mobile-first layout with full responsiveness
 
 ---
 
-## 🔧 How to Run Locally
+## 🔧 Getting Started
+
+To run the app locally or build for mobile/web:
 
 ```bash
-# Clone the repo
-git clone https://github.com/your-username/mindful-sessions.git
-cd mindful-sessions
+# 1. Clone the repository
+git clone https://github.com/your-username/mindful-minutes.git
+cd mindful-minutes
 
-# Install dependencies
+# 2. Install dependencies
 npm install
 
-# Run the dev server
-ng serve
+# 3. Start the development server
+ionic serve
+
+# 4. Build the project for production
+ionic build
+
+# 5. Add mobile platforms (if targeting native)
+ionic cap add android
+ionic cap add ios
+
+# 6. Sync your web build with the native shell
+ionic cap sync
+
+# 7. Open native IDE project (optional)
+ionic cap open android   # or: ionic cap open ios
